@@ -40,3 +40,38 @@ button:hover {
     font-weight: bold;
     color: #333;
 }
+/* 1. ቀለሞችን እዚህ ጋር እንወስናለን */
+:root {
+    --bg-color: #f4f4f4;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --input-bg: #ffffff;
+    --border-color: #dddddd;
+}
+
+/* 2. Dark Mode ሲሆን የሚቀየሩ ቀለሞች */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --container-bg: #2d2d2d;
+    --text-color: #f4f4f4;
+    --input-bg: #3d3d3d;
+    --border-color: #555555;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.3s; /* ቀለሙ ሲቀየር ቀስ ብሎ እንዲሆን */
+}
+
+.container {
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    /* ሌላው የድሮው ኮድ እንዳለ ይቀጥላል... */
+}
+
+input, select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}

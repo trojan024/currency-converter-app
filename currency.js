@@ -1,17 +1,39 @@
 // 1. የዛሬውን የምንዛሬ ዋጋ ከ API የሚያመጣ ፈንክሽን
 let exchangeRates = { USD: 120 }; // Default value
 
+// 1. የዛሬውን ዋጋ ከ API ሲያመጣ ስህተት ካለ ለመያዝ (Error Handling)
 async function fetchRates() {
+    const resultDiv = document.getElementById('result');
+    
     try {
-        // ምሳሌ፡ ነፃ API በመጠቀም (ማሳሰቢያ፡ እውነተኛ API Key ሊያስፈልግ ይችላል)
+        // ኢንተርኔት መኖሩን ቼክ ለማድረግ
         const response = await fetch('https://api.exchangerate-api.com/v4/latest/ETB');
+        
+        if (!response.ok) {
+            throw new Error("API Error");
+        }
+
         const data = await response.json();
         exchangeRates.USD = (1 / data.rates.USD).toFixed(2);
-        console.log("የዛሬው የዶላር ዋጋ በብር፦", exchangeRates.USD);
+        console.log("ዳታው መጥቷል!");
+
     } catch (error) {
-        console.log("የዛሬውን ዋጋ ማግኘት አልተቻለም፣ የቆየውን እንጠቀማለን።");
+        // ስህተት ሲፈጠር እዚህ ጋር ነው የሚመጣው
+        console.log("ኢንተርኔት የለም ወይም APIው አልሰራም");
+        
+        if (resultDiv) {
+            resultDiv.innerHTML = `<p style="color: red; font-weight: bold; border: 1px solid red; padding: 10px;">
+                ማሳሰቢያ፡ የኢንተርኔት ግንኙነት የለም። የቆየውን ዋጋ እየተጠቀምን ነው።
+            </p>`;
+        }
     }
 }
+
+// ፈንክሽኑን መጥራት እንዳትረሳ!
+fetchRates();
+
+// ፈንክሽኑን መጥራት እንዳትረሳ!
+fetchRates();
 
 fetchRates(); // ገጹ ሲከፈት ዋጋውን እንዲያመጣ
 
@@ -61,3 +83,24 @@ function renderHistory() {
         historyList.appendChild(li);
     });
 }
+const toggleSwitch = document.querySelector('#checkbox');
+const currentTheme = localStorage.getItem('theme');
+
+// መጀመሪያ ሲከፈት የተቀመጠ ምርጫ ካለ መፈተሽ
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+    }
+}
+
+// Switch ሲደረግ የሚሰራ ፈንክሽን
+toggleSwitch.addEventListener('change', (e) => {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }    
+});
