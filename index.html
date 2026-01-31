@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <title>የምንዛሬ መቀየሪያ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>የምንዛሬ መቀየሪያ</h2>
+        <input type="number" id="amount" placeholder="የብር መጠን ያስገቡ...">
+        
+        
+            <select id="direction">
+                <option value="ETBtoUSD">ከብር ወደ ዶላር (ETB to USD)</option>
+                <option value="USDtoETB">ከዶላር ወደ ብር (USD to ETB)</option>
+            </select>
+       
+
+        <button id="convertBtn">ቀይር</button>
+        <div id="historySection">
+    <h4>የልውውጥ ታሪክ</h4>
+    <ul id="historyList"></ul>
+    <button id="clearBtn" style="background-color: #dc3545; margin-top: 10px;">ታሪክ አጽዳ</button>
+</div>
+        
+        <div id="result">ውጤቱ እዚህ ይታያል</div>
+    </div>
+
+    <script src="currency.js"></script>
+</body>
+</html>
